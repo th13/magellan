@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 
-group = GROUP
-version = VERSION_NAME
+group = 'com.wealthfront'
+version = '1.0.0'
 
 android {
   compileSdkVersion 25
-  buildToolsVersion "25.0.1"
+  buildToolsVersion '26.0.2'
 
   resourcePrefix 'magellan_'
 
@@ -22,10 +22,33 @@ android {
     release {
       minifyEnabled false
     }
+    debug {
+      testCoverageEnabled true
+    }
+    local {
+
+    }
+    qa {
+
+    }
   }
+
+
+    flavorDimensions 'platform'
+
+    productFlavors {
+        mobile {
+            dimension 'platform'
+        }
+
+        tv {
+            dimension 'platform'
+            minSdkVersion 21
+        }
+    }
 }
 
-apply from: rootProject.file('checkstyle/checkstyle.gradle')
+apply from: project.file('../checkstyle/checkstyle.gradle')
 
 dependencies {
 
@@ -41,5 +64,3 @@ dependencies {
   }
 
 }
-
-apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

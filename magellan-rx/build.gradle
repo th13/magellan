@@ -1,8 +1,5 @@
 apply plugin: 'com.android.library'
 
-group = GROUP
-version = VERSION_NAME
-
 android {
   compileSdkVersion 25
   buildToolsVersion "25.0.1"
@@ -16,14 +13,37 @@ android {
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
   }
-  buildTypes {
-    release {
-      minifyEnabled false
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+        debug {
+            testCoverageEnabled true
+        }
+        local {
+
+        }
+        qa {
+
+        }
     }
-  }
+
+
+    flavorDimensions 'platform'
+
+    productFlavors {
+        mobile {
+            dimension 'platform'
+        }
+
+        tv {
+            dimension 'platform'
+            minSdkVersion 21
+        }
+    }
 }
 
-apply from: rootProject.file('checkstyle/checkstyle.gradle')
+apply from: project.file('../checkstyle/checkstyle.gradle')
 
 dependencies {
 
@@ -35,5 +55,3 @@ dependencies {
   testCompile 'com.google.truth:truth:0.28'
   testCompile 'org.mockito:mockito-core:2.0.31-beta'
 }
-
-apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
